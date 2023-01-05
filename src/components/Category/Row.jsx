@@ -1,30 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
+import instance from "../../axios";
 
-const Row = ({ title }) => {
+const Row = ({ title, fetchUrl }) => {
+  const imgUrl = "https://image.tmdb.org/t/p/original/";
+  const [movies, setMovies] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await instance.get(fetchUrl);
+      setMovies(response.data.results);
+      return response;
+    }
+    fetchData();
+  }, [fetchUrl]);
+  console.log(movies);
+
   return (
-    <div class="w-full h-[500px] mt-2 p-1 flex flex-col bg-black">
-      <h1 class="text-4xl m-5 text-slate-300/50 font-semibold border-b-4 border-slate-600/30">
-        {title}
-      </h1>
-      <div class="w-full h-full flex flex-row justify-center items-center">
-        <div class="flex justify-center items-center">
-          <button class="w-[50px] h-[100px] text-slate-400 text-xl text-center rounded-l-full bg-slate-500/30  hover:bg-slate-900/30">
-            {"<"}
-          </button>
-        </div>
+    <div className="z-10 w-full h-[300px] m-1  flex flex-col  bg-black    hover:touch-pan-right">
+      <div className="z-10 p-2 w-full h-[40px] m-2 flex justify-start items-center">
+        <h1 className=" text-white text-3xl font-extrabold my-5">{title}</h1>
+      </div>
 
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <div class="flex justify-center items-center">
-          <button class="w-[50px] h-[100px] text-slate-400  text-xl text-center rounded-r-full bg-slate-500/30 hover:bg-slate-900/30 ">
-            {">"}
-          </button>
-        </div>
+      <div className="-z-5 w-full h-full flex flex-row  ">
+        {movies.map((movie) => (
+          <MovieCard
+            name={movie.original_title}
+            image={`${imgUrl}${movie.poster_path}`}
+          />
+        ))}
       </div>
     </div>
   );

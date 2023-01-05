@@ -1,4 +1,6 @@
-
+body{
+  background: #000;
+}
 .Logo {
   background: -webkit-linear-gradient(rgb(13, 11, 39), rgb(25, 22, 77),rgb(58, 53, 167), rgb(127, 58, 136), rgb(241, 90, 183),rgb(247, 164, 210));
   -webkit-background-clip: text;
