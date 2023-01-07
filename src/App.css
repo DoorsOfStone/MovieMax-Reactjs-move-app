@@ -12,3 +12,19 @@ body{
   -webkit-text-fill-color:#e4b125;
   cursor: pointer;
 }
+.movieCard{
+  overflow-y:auto;
+  
+  
+}
+ .movieCard.movieCard::-webkit-scrollbar{
+  width: 10px;
+  background: linear-gradient(to bottom, rgba(109, 109, 109, 0.473), rgba(19, 4, 44, 0.438));
+  visibility: hidden;
+}
+.movieCard::-webkit-scrollbar:hover{
+  visibility: visible;
+}
+.movieCard::-webkit-scrollbar-corner{
+  background-color: transparent;
+}

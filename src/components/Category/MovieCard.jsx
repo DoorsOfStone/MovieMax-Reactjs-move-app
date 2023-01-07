@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MovieCard = ({ name, image }) => {
   return (
-    <div className="m-1  hover:scale-x-100  transition-transform-o.25ms  hover:opacity-40">
+    <div className="m-1  transition-transform-o.25ms  hover:opacity-40 hover:shadow-lg hover:shadow-blue-500">
       <img
-        className="min-w-[150px] min-h-[200px]  text-slate-400 text-xl font-bold object-contain flex"
+        className="min-w-[160px] min-h-[200px]  text-slate-400 text-xl font-bold object-contain flex"
         src={image}
         alt={name}
       />
