@@ -26,8 +26,8 @@ const Row = ({ title, fetchUrl }) => {
   } */
 
   return (
-    <div className="z-10 w-full h-[300px] m-1  flex flex-col  bg-black    hover:touch-pan-right">
-      <div className="z-10 p-2 w-full h-[40px] m-2 flex justify-start items-center">
+    <div className="z-5 w-full h-[300px] m-1  flex flex-col  bg-black    hover:touch-pan-right">
+      <div className="z-5 p-2 w-full h-[40px] m-2 flex justify-start items-center">
         <h1 className=" text-white/60 text-3xl font-extrabold my-5">{title}</h1>
       </div>
 

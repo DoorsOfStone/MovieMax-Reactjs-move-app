@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,500&display=swap');
+.Login{
+    background-image: url('https://images.unsplash.com/photo-1621276336795-925346853745?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80');
+    background-size: cover;
+  }
+  .logo{
+    background:linear-gradient( to right, transparent, rgb(10, 10, 48), rgb(15, 13, 58),rgb(58, 53, 167), rgb(127, 58, 136), rgb(241, 90, 183),rgb(250, 210, 232));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Raleway', sans-serif;
+  }
+  .loginForm{
+    background-color: rgba(21, 18, 48, 0.575);
+    border-radius: 5px;
+  }

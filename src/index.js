@@ -1,12 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import "./index.css";
 import App from "./App";
+import Login from "./pages/Login";
+import Favorites from "./pages/Favorites";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route element={<App />} path="/main" />
+        <Route element={<Login />} path="/" exact />
+        <Route element={<Favorites />} path="/Favorites" />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );

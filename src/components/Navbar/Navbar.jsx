@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import MovieCard from "../Category/MovieCard";
 import * as FiIcons from "react-icons/fi";
+import * as MdIcons from "react-icons/md";
 
 const Navbar = ({ fetchMovie }) => {
   const imgUrl = "https://image.tmdb.org/t/p/original/";
@@ -28,11 +30,13 @@ const Navbar = ({ fetchMovie }) => {
   };
   return (
     <>
-      <div className="w-full h-full flex flex-col z-10">
-        <nav className="fixed flex flex-row w-full h-[50px] bg-black z-10 ">
+      <div className="w-full h-full flex flex-col ">
+        <nav className="fixed flex flex-row w-full h-[50px] bg-black z-20">
           <div className="flex flex-row justify-center items-center w-1/4 h-full p-2 text-slate-400 text-md">
-            <div className="w-1/2 h-full flex flex-row justify-center items-center">
-              <h1 className="Logo text-2xl font-extrabold">MovieMax</h1>
+            <div className="w-1/2 h-full flex  justify-center items-center">
+              <h1 className="Logo text-[40px] font-extrabold text-center ">
+                MovieMax
+              </h1>
             </div>
             <div className="w-1/2 h-full flex flex-row justify-center items-center text-md">
               <h4 className="mx-5 hover:text-[20px]">Home</h4>
@@ -52,19 +56,20 @@ const Navbar = ({ fetchMovie }) => {
             />
           </form>
           <div className="w-1/4 h-full flex flex-row justify-end items-center ">
-            <h4 className="favs text-slate-400 text-[30px] mr-5:">♡</h4>
-            <button className="w-[60px] h-[30px] bg-[#15d6f8] rounded-sm hover:bg-[#e4b125] text-white text-md m-2">
-              Sign In
-            </button>
-            <button className="w-[60px] h-[30px] bg-[#ad53a6] rounded-sm hover:bg-[#e4b125] text-white text-md m-2">
-              Demo
-            </button>
+            <Link to={"/Favorites"}>
+              <MdIcons.MdFavorite className="favs text-red-500 text-[30px] mr-5 hover:text-red-500/40" />
+            </Link>
+            <Link to={"/"}>
+              <button className="w-[80px] h-[30px] bg-slate-400/40 rounded-sm hover:bg-slate-700/40 text-white text-md m-2">
+                Sign out
+              </button>
+            </Link>
           </div>
         </nav>
         {/* so if movies is true "if there is a value for movies" then we return a container where we map through our results of our api call, 
          if movies is not true (meaning we are searching anything at the moment ) ":" means "else" return a empty div */}
         {movies ? (
-          <div className="text-whitew-full h-[1000px] p-5 flex flex-row flex-wrap mt-[100px] mb-[400px] bg-slate-600/20">
+          <div className="results fixed text-white  p-10 flex flex-row flex-wrap  mb-[400px] bg-black/90 z-10">
             {searchResults.map((movie, index) => (
               <div
                 className="w-[200px] h-[300px] m-3 hover:opacity-40  shadow-2xl hover:shadow-blue-500"
