@@ -1,6 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import requests from "../../request";
+import instance from "../../axios";
 
-const Banner = () => {
+// youtube link use key from api
+//https://www.youtube.com/watch?v=SUXWAEX2jlg
+const Banner = ({ fetchUrl }) => {
+  const [movieId, setMovieId] = useState([]);
+  const videoCallUrl = "http://api.themoviedb.org/3/movie/550/videos?api_key=";
+  /*   useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await instance.get(fetchUrl);
+        const data = response.data.results.slice(
+          Math.floor(Math.random() / response.length)
+        );
+        setMovieId(data);
+      } catch {
+        console.log(Error);
+      }
+    }
+    fetchData();
+    //async function fetchVideo(){
+    //const response
+
+    console.log(movieId);
+    // }
+  }, [fetchUrl]); */
   return (
     <div className="w-[screen] h-[600px] flex flex-row justify-center bg-black ">
       <div className=" w-full h-full flex justify-center items-center bg-transparent">

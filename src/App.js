@@ -9,8 +9,8 @@ import axios from "axios";
 function App() {
   return (
     <div className="home bg-black">
-      <Navbar fetchMovie={requests.fetchMovie} />
-      <Banner />
+      <Navbar />
+      <Banner fetchUrl={requests.getTrending} />
       <Row title="Trending" fetchUrl={requests.getTrending} />
       <Row title="Netflix Originals" fetchUrl={requests.getNetflix} />
       <Row title="Action" fetchUrl={requests.getAction} />

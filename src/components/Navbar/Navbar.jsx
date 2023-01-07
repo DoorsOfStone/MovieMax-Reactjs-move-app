@@ -26,7 +26,9 @@ const Navbar = ({ fetchMovie }) => {
   const getMovie = (e) => {
     e.preventDefault();
     setQuery(movies);
-    setMovie(" ");
+  };
+  const clearInput = (e) => {
+    setMovie("");
   };
   return (
     <>
@@ -34,14 +36,9 @@ const Navbar = ({ fetchMovie }) => {
         <nav className="fixed flex flex-row w-full h-[50px] bg-black z-20">
           <div className="flex flex-row justify-center items-center w-1/4 h-full p-2 text-slate-400 text-md">
             <div className="w-1/2 h-full flex  justify-center items-center">
-              <h1 className="Logo text-[40px] font-extrabold text-center ">
-                MovieMax
+              <h1 className="Logo w-full h-full text-3xl flex flex-row font-extrabold text-center ">
+                /////// MovieMax
               </h1>
-            </div>
-            <div className="w-1/2 h-full flex flex-row justify-center items-center text-md">
-              <h4 className="mx-5 hover:text-[20px]">Home</h4>
-              <h4 className="mx-5 hover:text-[20px]">Trending </h4>
-              <h4 className="mx-5 hover:text-[20px]">New</h4>
             </div>
           </div>
           <form
@@ -54,6 +51,18 @@ const Navbar = ({ fetchMovie }) => {
               value={movies}
               onChange={updateMovie}
             />
+            <>
+              {movies ? (
+                <>
+                  <MdIcons.MdClear
+                    onClick={clearInput}
+                    className="text-slate-400 text-xl hover:text-slate-500/40"
+                  />
+                </>
+              ) : (
+                <div></div>
+              )}
+            </>
           </form>
           <div className="w-1/4 h-full flex flex-row justify-end items-center ">
             <Link to={"/Favorites"}>

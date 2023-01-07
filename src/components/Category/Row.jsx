@@ -6,7 +6,7 @@ import instance from "../../axios";
 const Row = ({ title, fetchUrl }) => {
   const imgUrl = "https://image.tmdb.org/t/p/original/";
   const [movies, setMovies] = useState([]);
-  var presentMovieSlide = 0;
+
   useEffect(() => {
     async function fetchData() {
       const response = await instance.get(fetchUrl);
