@@ -1,46 +1,47 @@
 import React, { useState, useEffect } from "react";
 import requests from "../../request";
-import instance from "../../axios";
+import axios from "../../axios";
 
 // youtube link use key from api
 //https://www.youtube.com/watch?v=SUXWAEX2jlg
-const Banner = ({ fetchUrl }) => {
-  const [movieId, setMovieId] = useState([]);
+const imgUrl = "https://image.tmdb.org/t/p/original/";
+const Banner = () => {
+  const [movie, setMovie] = useState([]);
+
   const videoCallUrl = "http://api.themoviedb.org/3/movie/550/videos?api_key=";
-  /*   useEffect(() => {
+  useEffect(() => {
     async function fetchData() {
-      try {
-        const response = await instance.get(fetchUrl);
-        const data = response.data.results.slice(
-          Math.floor(Math.random() / response.length)
-        );
-        setMovieId(data);
-      } catch {
-        console.log(Error);
-      }
+      const response = await axios.get(requests.getNetflix);
+      setMovie(
+        response.data.results[
+          Math.floor(Math.random() * response.data.results.length - 1)
+        ]
+      );
+      return response;
     }
     fetchData();
-    //async function fetchVideo(){
-    //const response
-
-    console.log(movieId);
-    // }
-  }, [fetchUrl]); */
+    console.log(movie);
+  }, []);
   return (
-    <div className="w-[screen] h-[600px] flex flex-row justify-center bg-black ">
-      <div className=" w-full h-full flex justify-center items-center bg-transparent">
-        <img
-          className="-z-5 w-2/3 h-full shadow-[5px_5px_60px_blue] rounded-t-lg"
-          src="https://images6.fanpop.com/image/photos/40000000/The-Finest-Hours-Banner-movie-trailers-40025062-1200-638.jpg"
-        />
-        <div className="z-2  h-[300px] flex flex-col justify-center items-center -ml-[300px] mt-[200px] p-5 ">
-          <button className="w-[150px] h-[40px]  m-2 rounded-sm bg-slate-400 text-xl font-medium text-white hover:bg-[#e4b125]  hover:shadow-[#ff6cdf] shadow-lg ">
-            Trailer
-          </button>
-          <button className="w-[150px] h-[40px] m-2 rounded-sm bg-slate-700 text-xl font-medium text-white hover:bg-[#e4b125] hover:shadow-[#ff6cdf] shadow-lg">
-            Save
-          </button>
-        </div>
+    <div
+      className="w-full h-[700px] flex items-center justify-center overflow-hidden"
+      style={{
+        backgroundSize: "cover",
+        backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
+        backkgroundPostion: "center center",
+      }}
+    >
+      <div className="  w-[600px] h-[400px] flex flex-col items-center justify-center">
+        <h1 className="text-white text-[40px] mb-5 font-semibold  ">
+          {movie?.original_title || movie?.name || movie?.title}
+        </h1>
+        <button className="w-[150px] h-[40px]  m-2 rounded-sm bg-black/60 text-xl font-medium text-white hover:bg-[#e4b125]  hover:shadow-[#ff6cdf] shadow-lg ">
+          Trailer
+        </button>
+        <button className="w-[150px] h-[40px] m-2 rounded-sm bg-black/60 text-xl font-medium text-white hover:bg-[#e4b125] hover:shadow-[#ff6cdf] shadow-lg">
+          Save
+        </button>
+        <p className="text-white text-lg font-extralight">"{movie.overview}"</p>
       </div>
     </div>
   );

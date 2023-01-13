@@ -16,7 +16,7 @@ const Navbar = ({ fetchMovie }) => {
     async function movieSearch() {
       const response = await axios.get(urlBase);
       setSearched(response.data.results);
-      console.log(response.data.results);
+      return response;
     }
     movieSearch();
   }, [query]);
@@ -33,7 +33,7 @@ const Navbar = ({ fetchMovie }) => {
   return (
     <>
       <div className="w-full h-full flex flex-col ">
-        <nav className="fixed flex flex-row w-full h-[50px] bg-black z-20">
+        <nav className="fixed flex flex-row w-full bg-black h-[50px] z-20">
           <div className="flex flex-row justify-center items-center w-1/4 h-full p-2 text-slate-400 text-md">
             <div className="w-1/2 h-full flex  justify-center items-center">
               <h1 className="Logo w-full h-full text-3xl flex flex-row font-extrabold text-center ">

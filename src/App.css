@@ -19,21 +19,17 @@ body::-webkit-scrollbar{
   cursor: pointer;
 }
 .movieCard{
-  overflow-y: scroll;
+  overflow-y: hidden;
+  overflow-x: scroll;
   
   
 }
  .movieCard.movieCard::-webkit-scrollbar{
   width: 10px;
-  background: linear-gradient(to bottom, rgba(109, 109, 109, 0.473), rgba(19, 4, 44, 0.438));
   visibility: hidden;
 }
-.movieCard::-webkit-scrollbar:hover{
-  visibility: visible;
-}
-.movieCard::-webkit-scrollbar-corner{
-  background-color: transparent;
-}
+
+
 .results{
   width: 100%;
   height: 1000px;
