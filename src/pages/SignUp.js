@@ -5,8 +5,10 @@ function SignUp() {
   return (
     <div className="  min-w-screen min-h-screen flex justify-center items-center  ">
       <div className="Login w-full h-screen  flex flex-col justify-center items-center ">
-        <logo className="logo text-[200px]">MovieMax</logo>
-        <form className="loginForm w-[600px] h-[600px] flex flex-col justify-center items-center mt-[100px] mb-[200px] text-white">
+        <form className="loginForm w-[1000px] h-[1200px] flex flex-col justify-center items-center mt-[100px] mb-[200px] text-white">
+          <h1 className="logo text-[50px]  mb-[50px] mt-[100px] font-bold">
+            ////MovieMax
+          </h1>
           <h1 className="text-2xl mt-3">Register</h1>
           <div className="w-full h-[60px] m-5 flex flex-col items-center">
             <p>Email</p>
@@ -34,7 +36,7 @@ function SignUp() {
             />
           </div>
           <p>Or Try</p>
-          <div className="flex flex-row justify-center items-center w-2/3 border-t-2 p-2 ">
+          <div className="flex flex-row justify-center items-center w-2/3 p-2 ">
             <Link to={"/main"}>
               <button className="w-[100px] h-[50px] bg-slate-400/40 hover:bg-slate-600/40 rounded-xl m-5">
                 Demo

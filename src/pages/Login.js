@@ -6,9 +6,9 @@ export default function Login() {
   return (
     <div className="  min-w-screen min-h-screen flex justify-center items-center  ">
       <div className="Login w-full h-screen  flex flex-col justify-center items-center ">
-        <logo className="logo text-[200px]">MovieMax</logo>
-        <form className="loginForm w-[600px] h-[600px] flex flex-col justify-center items-center mt-[100px] mb-[200px] text-white">
-          <h1 className="text-2xl">Sing In</h1>
+        <form className="loginForm w-[1000px] h-[1200px] flex flex-col justify-center items-center mt-[100px] mb-[200px] text-white ">
+          <h1 className="logo text-[50px] font-bold mb-[50px]">////MovieMax</h1>
+          <h1 className="text-2xl mb-[20px]">Sing In</h1>
           <div className="w-full h-[60px] m-5 flex flex-col items-center">
             <p>Email</p>
             <input
