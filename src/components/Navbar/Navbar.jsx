@@ -5,6 +5,8 @@ import * as FiIcons from "react-icons/fi";
 import * as MdIcons from "react-icons/md";
 import { useSelector } from "react-redux";
 import SavedMovie from "./SavedMovie";
+import ReactPlayer from "react-player/youtube";
+import movieTrailer from "movie-trailer";
 
 const Navbar = ({ fetchMovie }) => {
   var imgUrl = "https://image.tmdb.org/t/p/original/";
@@ -12,6 +14,8 @@ const Navbar = ({ fetchMovie }) => {
   const [favMenu, setFavMenu] = useState(false);
   const [movies, setMovie] = useState("");
   const [query, setQuery] = useState("");
+  const [movieId, setMovieId] = useState("");
+  const youTubeUrl = "https://www.youtube.com/watch?v=";
   const [searchResults, setSearched] = useState([]);
   const Api_Key = "0429764d692187b263694f808db64838";
   const urlBase = `https://api.themoviedb.org/3/search/movie?api_key=${Api_Key}&language=en-US&page=1&include_adult=false&query=${query}`;
@@ -23,6 +27,18 @@ const Navbar = ({ fetchMovie }) => {
     }
     movieSearch();
   }, [urlBase]);
+
+  const playVideo = (movie) => {
+    if (movieId) {
+      setMovieId("");
+    } else {
+      movieTrailer(movie?.name || movie?.original_title || movie?.title || "", {
+        id: true,
+        multi: false,
+      }).then((response) => setMovieId(response));
+    }
+  };
+
   const updateMovie = (e) => {
     setMovie(e.target.value);
   };
@@ -86,12 +102,15 @@ const Navbar = ({ fetchMovie }) => {
               </div>
               <div className="w-full h-full flex flex-row p-5">
                 {saved?.map((item, index) => (
-                  <SavedMovie
+                  <div
                     key={item.index}
-                    id={item.title}
-                    name={item.title}
-                    image={item.image}
-                  />
+                    className="w-[200px] min-h-[300px] flex flex-col m-3"
+                  >
+                    <img
+                      className="w-full min-h-[200px] "
+                      src={`${imgUrl}${item.poster_path}`}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
@@ -109,6 +128,7 @@ const Navbar = ({ fetchMovie }) => {
             <div className=" w-full  flex xs:flex-col md:flex-row md:flex-wrap ">
               {searchResults.map((movie, index) => (
                 <div
+                  onClick={() => playVideo(movie)}
                   className="w-[200px] h-[300px] m-3 hover:opacity-40  shadow-2xl hover:shadow-blue-500"
                   key={index}
                 >
@@ -119,6 +139,22 @@ const Navbar = ({ fetchMovie }) => {
                   />
                 </div>
               ))}
+              {movieId && (
+                <div className="z-50 flex justify-center items-center  ">
+                  <MdIcons.MdOutlineArrowBack
+                    onClick={() => playVideo()}
+                    className="z-50 text-white text-[40px] border border-white mt-5 hover:text-slate-600/60 cursor-pointer "
+                  />
+                  <ReactPlayer
+                    className="react_player flex  m-2 "
+                    width="100%"
+                    height="100%"
+                    playing="true"
+                    control="true"
+                    url={`${youTubeUrl}${movieId}`}
+                  />
+                </div>
+              )}
             </div>
           </div>
         ) : (

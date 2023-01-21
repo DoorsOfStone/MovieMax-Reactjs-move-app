@@ -33,7 +33,7 @@ const Row = ({ title, fetchUrl }) => {
     } else {
       movieTrailer(movie?.name || movie?.original_title || movie?.title || "", {
         id: true,
-        multi: false,
+        multi: true,
       }).then((response) => setMovieId(response));
     }
   };
@@ -49,7 +49,7 @@ const Row = ({ title, fetchUrl }) => {
           <div
             onClick={() => playVideo(movie)}
             key={index}
-            className="container m-1   hover:shadow-lg hover:shadow-blue-500 active:opacity-10"
+            className="container m-1   hover:shadow-lg hover:shadow-blue-500 hover:opacity-40"
           >
             <img
               id={movie.id}
@@ -57,21 +57,6 @@ const Row = ({ title, fetchUrl }) => {
               src={`${imgUrl}${movie.poster_path}`}
               alt={movie?.original_title || movie?.name || movie?.title}
             />
-            <button
-              onClick={() =>
-                dispatch(
-                  saveMovie({
-                    id: movie,
-                    key: movie,
-                    name: movie.title,
-                    image: `${imgUrl}${movie.poster_path}`,
-                  })
-                )
-              }
-              className="btn w-[100px] h-[100px] text-[40px] flex justify-center items-center  rounded-full text-white border  border-white hover:text-red-600 "
-            >
-              <MdIcons.MdFavorite />
-            </button>
           </div>
         ))}
       </div>
