@@ -5,7 +5,7 @@ import * as MdIcons from "react-icons/md";
 //import { useSelector } from "react-redux";
 import ReactPlayer from "react-player/youtube";
 import movieTrailer from "movie-trailer";
-import { auth, logout } from "../../firebase";
+import { logout } from "../../firebase";
 
 const Navbar = () => {
   var imgUrl = "https://image.tmdb.org/t/p/original/";
@@ -27,10 +27,6 @@ const Navbar = () => {
     }
     movieSearch();
   }, [urlBase]);
-
-  // const signOut = () => {
-  //   logout();
-  // };
 
   const playVideo = (movie) => {
     if (movieId) {
@@ -111,13 +107,14 @@ const Navbar = () => {
                 ))}
               </div>
                 </div>*/}
-
-            <button
-              onClick={logout}
-              className="w-[80px] h-[30px] bg-slate-400/40 rounded-sm hover:bg-slate-700/40 text-white text-md m-2"
-            >
-              Sign out
-            </button>
+            <Link to={"/"}>
+              <button
+                onClick={logout}
+                className="w-[80px] h-[30px] bg-slate-400/40 rounded-sm hover:bg-slate-700/40 text-white text-md m-2"
+              >
+                Sign out
+              </button>
+            </Link>
           </div>
         </nav>
         {/* so if movies is true "if there is a value for movies" then we return a container where we map through our results of our api call, 
