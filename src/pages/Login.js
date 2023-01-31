@@ -1,8 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import * as FcIcons from "react-icons/fc";
 import "./pages.css";
+import { auth, signInWithGoogle, logInWithEmailAndPassword } from "../firebase";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, loading, error] = useAuthState(auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+    if (user) navigate("/main");
+    console.log(user);
+  }, [user, loading]);
+
   return (
     <div className="  min-w-screen min-h-screen flex justify-center items-center  ">
       <div className="Login w-full h-screen  flex flex-col justify-center items-center ">
@@ -13,6 +28,8 @@ export default function Login() {
             <p>Email</p>
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-3/4 h-[40px] rounded-lg outline-none  text-slate-700 p-3"
               placeholder="Email"
             />
@@ -22,12 +39,17 @@ export default function Login() {
             <p>Password</p>
             <input
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-3/4 h-[40px] rounded-lg outline-none text-slate-700 p-3"
               placeholder="Password"
             />
           </div>
           <div className="flex flex-row justify-center items-center w-full ">
-            <button className="w-[100px] h-[50px] bg-slate-400/40 hover:bg-slate-600/40 rounded-xl m-5">
+            <button
+              onClick={() => logInWithEmailAndPassword(email, password)}
+              className="w-[100px] h-[50px] bg-slate-400/40 hover:bg-slate-600/40 rounded-xl m-5"
+            >
               Sign In
             </button>
             <Link to={"/main"}>
@@ -36,6 +58,9 @@ export default function Login() {
               </button>
             </Link>
           </div>
+          <button className="text-xl " onClick={signInWithGoogle}>
+            <FcIcons.FcGoogle />
+          </button>
           <Link to={"/Register"}>Sign Up?</Link>
         </form>
       </div>

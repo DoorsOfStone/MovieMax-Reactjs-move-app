@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import * as FiIcons from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import * as MdIcons from "react-icons/md";
-import { useSelector } from "react-redux";
-import SavedMovie from "./SavedMovie";
+//import { useSelector } from "react-redux";
 import ReactPlayer from "react-player/youtube";
 import movieTrailer from "movie-trailer";
+import { auth, logout } from "../../firebase";
 
-const Navbar = ({ fetchMovie }) => {
+const Navbar = () => {
   var imgUrl = "https://image.tmdb.org/t/p/original/";
-  const saved = useSelector((state) => state.saved);
-  const [favMenu, setFavMenu] = useState(false);
+  // const saved = useSelector((state) => state.saved);
+  // const [favMenu, setFavMenu] = useState(false);
+  const navigate = useNavigate();
   const [movies, setMovie] = useState("");
   const [query, setQuery] = useState("");
   const [movieId, setMovieId] = useState("");
@@ -27,6 +27,10 @@ const Navbar = ({ fetchMovie }) => {
     }
     movieSearch();
   }, [urlBase]);
+
+  // const signOut = () => {
+  //   logout();
+  // };
 
   const playVideo = (movie) => {
     if (movieId) {
@@ -49,21 +53,17 @@ const Navbar = ({ fetchMovie }) => {
   const clearInput = (e) => {
     setMovie("");
   };
-  const showFavsMenu = () => {
-    setFavMenu(!favMenu);
-  };
+  //const showFavsMenu = () => {
+  //  setFavMenu(!favMenu);
+  //};
   return (
     <div>
       <div className="w-full h-full flex flex-col">
         <nav className="fixed flex flex-row w-full bg-black h-[50px] z-20">
           <div className="flex flex-row justify-center items-center w-1/4 h-full p-2 text-slate-400 text-md">
-            <div className="w-1/2 h-full flex  justify-center items-center">
-              <Link to={"/main"}>
-                <h1 className="Logo w-full h-full text-[50px] flex flex-row font-extrabold text-center ">
-                  //// MovieMax
-                </h1>
-              </Link>
-            </div>
+            <h1 className="Logo text-[50px] flex flex-row font-extrabold text-center ">
+              //// MovieMax
+            </h1>
           </div>
           <form
             onSubmit={getMovie}
@@ -89,36 +89,35 @@ const Navbar = ({ fetchMovie }) => {
             </>
           </form>
           <div className="w-1/4 h-full flex flex-row justify-end items-center ">
-            <MdIcons.MdFavorite
+            {/*     <MdIcons.MdFavorite
               onClick={showFavsMenu}
               className=" text-red-500 text-[30px] mr-5 hover:text-red-500/40"
             />
-            <div className={favMenu ? "favs__Menu active " : "favs__Menu"}>
+           <div className={favMenu ? "favs__Menu active " : "favs__Menu"}>
               <div className="w-full h-[100px] p-10   flex justify-end items-baseline ">
                 <MdIcons.MdClear
                   onClick={showFavsMenu}
                   className="text-white text-[40px] hover:text-white/60"
                 />
               </div>
-              <div className="w-full h-full flex flex-row p-5">
+              <div className="w-full h-full flex flex-row flex-wrap p-5">
                 {saved?.map((item, index) => (
                   <div
                     key={item.index}
-                    className="w-[200px] min-h-[300px] flex flex-col m-3"
+                    className="w-[200px] h-[300px] text-white bg-black/50 flex flex-col m-3"
                   >
-                    <img
-                      className="w-full min-h-[200px] "
-                      src={`${imgUrl}${item.poster_path}`}
-                    />
+                    <img src={`${imgUrl}${item.poster_path}`} />
                   </div>
                 ))}
               </div>
-            </div>
-            <Link to={"/"}>
-              <button className="w-[80px] h-[30px] bg-slate-400/40 rounded-sm hover:bg-slate-700/40 text-white text-md m-2">
-                Sign out
-              </button>
-            </Link>
+                </div>*/}
+
+            <button
+              onClick={logout}
+              className="w-[80px] h-[30px] bg-slate-400/40 rounded-sm hover:bg-slate-700/40 text-white text-md m-2"
+            >
+              Sign out
+            </button>
           </div>
         </nav>
         {/* so if movies is true "if there is a value for movies" then we return a container where we map through our results of our api call, 
@@ -133,9 +132,8 @@ const Navbar = ({ fetchMovie }) => {
                   key={index}
                 >
                   <img
-                    className="contain w-full min-h-[200px]"
+                    className="contain w-full min-h-[200px] "
                     src={`${imgUrl}${movie.poster_path}`}
-                    alt={movie.orginal_title}
                   />
                 </div>
               ))}
@@ -143,7 +141,7 @@ const Navbar = ({ fetchMovie }) => {
                 <div className="z-50 flex justify-center items-center  ">
                   <MdIcons.MdOutlineArrowBack
                     onClick={() => playVideo()}
-                    className="z-50 text-white text-[40px] border border-white mt-5 hover:text-slate-600/60 cursor-pointer "
+                    className="z-50 text-white text-[40px] mt-5 hover:text-slate-600/60 cursor-pointer "
                   />
                   <ReactPlayer
                     className="react_player flex  m-2 "

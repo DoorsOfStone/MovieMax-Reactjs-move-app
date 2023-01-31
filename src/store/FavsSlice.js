@@ -8,17 +8,18 @@ const savedSlice = createSlice({
   reducers: {
     saveMovie: (state, action) => {
       const savedMovie = state.saved.find(
-        (movie) => movie.id === action.payload.id
+        (item) => item.id === action.payload.id
       );
       if (savedMovie) {
         alert("Already Added");
       } else {
         state.saved.push({ ...action.payload.id });
+        console.log(savedMovie);
       }
     },
     removeMovie: (state, action) => {
       const removeMovie = state.saved.filter(
-        (movie) => movie.id !== action.payload
+        (item) => item.id !== action.payload
       );
       state.saved = removeMovie;
     },
