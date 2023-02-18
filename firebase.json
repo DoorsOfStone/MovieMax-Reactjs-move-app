@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "moviemax_react",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

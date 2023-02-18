@@ -72,7 +72,7 @@ function Banner() {
         <p className="text-white text-3xl font-bold">
           "
           <span className="text-white text-lg  font-light">
-            {movie.overview}
+            {movie?.overview}
           </span>
           "
         </p>

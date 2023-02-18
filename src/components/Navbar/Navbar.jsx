@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as MdIcons from "react-icons/md";
-//import { useSelector } from "react-redux";
+import { getAuth, signOut } from "firebase/auth";
 import ReactPlayer from "react-player/youtube";
 import movieTrailer from "movie-trailer";
-import { logout } from "../../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { app } from "../../firebase";
 
-const Navbar = () => {
+function Navbar() {
   var imgUrl = "https://image.tmdb.org/t/p/original/";
   // const saved = useSelector((state) => state.saved);
-  // const [favMenu, setFavMenu] = useState(false);
+  const [favMenu, setFavMenu] = useState(false);
+  const auth = getAuth(app);
   const navigate = useNavigate();
+  const [user, loading, error] = useAuthState(auth);
   const [movies, setMovie] = useState("");
   const [query, setQuery] = useState("");
   const [movieId, setMovieId] = useState("");
@@ -19,15 +22,43 @@ const Navbar = () => {
   const [searchResults, setSearched] = useState([]);
   const Api_Key = "0429764d692187b263694f808db64838";
   const urlBase = `https://api.themoviedb.org/3/search/movie?api_key=${Api_Key}&language=en-US&page=1&include_adult=false&query=${query}`;
+  const [render, setRendering] = useState(false);
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
   useEffect(() => {
-    async function movieSearch() {
-      const response = await axios.get(urlBase);
-      setSearched(response.data.results);
-      return response;
-    }
+    if (loading) return;
+    if (!user) return navigate("/");
+  }, [user, loading]);
+
+  useEffect(() => {
+    const movieSearch = async () => {
+      try {
+        setRendering(true);
+        const response = await axios.get(urlBase);
+        setSearched(response.data.results);
+        setRendering(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     movieSearch();
   }, [urlBase]);
-
+  // async function movieSearch() {
+  //   try {
+  //     const response = await axios.get(urlBase);
+  //     setSearched(response.data.results);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
   const playVideo = (movie) => {
     if (movieId) {
       setMovieId("");
@@ -85,40 +116,17 @@ const Navbar = () => {
             </>
           </form>
           <div className="w-1/4 h-full flex flex-row justify-end items-center ">
-            {/*     <MdIcons.MdFavorite
-              onClick={showFavsMenu}
-              className=" text-red-500 text-[30px] mr-5 hover:text-red-500/40"
-            />
-           <div className={favMenu ? "favs__Menu active " : "favs__Menu"}>
-              <div className="w-full h-[100px] p-10   flex justify-end items-baseline ">
-                <MdIcons.MdClear
-                  onClick={showFavsMenu}
-                  className="text-white text-[40px] hover:text-white/60"
-                />
-              </div>
-              <div className="w-full h-full flex flex-row flex-wrap p-5">
-                {saved?.map((item, index) => (
-                  <div
-                    key={item.index}
-                    className="w-[200px] h-[300px] text-white bg-black/50 flex flex-col m-3"
-                  >
-                    <img src={`${imgUrl}${item.poster_path}`} />
-                  </div>
-                ))}
-              </div>
-                </div>*/}
-            <Link to={"/"}>
-              <button
-                onClick={logout}
-                className="w-[80px] h-[30px] bg-slate-400/40 rounded-sm hover:bg-slate-700/40 text-white text-md m-2"
-              >
-                Sign out
-              </button>
-            </Link>
+            <h2 className="text-white font-extralight">Hello...</h2>
+
+            <button
+              onClick={logOut}
+              className="w-[80px] h-[30px] bg-slate-400/40 rounded-sm hover:bg-slate-700/40 text-white text-md m-2"
+            >
+              Sign out
+            </button>
           </div>
         </nav>
-        {/* so if movies is true "if there is a value for movies" then we return a container where we map through our results of our api call, 
-         if movies is not true (meaning we are searching anything at the moment ) ":" means "else" return a empty div */}
+
         {movies ? (
           <div className="search__Results  fixed  w-full h-screen  bg-black/90 cover text-white  p-10 flex mb-[600px] z-10">
             <div className=" w-full  flex xs:flex-col md:flex-row md:flex-wrap ">
@@ -144,7 +152,6 @@ const Navbar = () => {
                     className="react_player flex  m-2 "
                     width="100%"
                     height="100%"
-                    playing="true"
                     control="true"
                     url={`${youTubeUrl}${movieId}`}
                   />
@@ -158,6 +165,6 @@ const Navbar = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Navbar;
