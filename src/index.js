@@ -3,11 +3,11 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import Login from "./pages/Login";
+// import Login from "./pages/Login";
 import { Provider } from "react-redux";
 import { store } from "./store/Store";
-import SignUp from "./pages/SignUp";
-import MovieInfo from "./pages/MovieInfo";
+// import SignUp from "./pages/SignUp";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -15,9 +15,9 @@ root.render(
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route element={<App />} path="/main" />
-          <Route element={<Login />} path="/" exact />
-          <Route element={<SignUp />} path="/Register" />
+          <Route element={<App />} path="/" eact />
+          {/* <Route element={<Login />} path="/" /> */}
+          {/* <Route element={<SignUp />} path="/Register" /> */}
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

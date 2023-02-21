@@ -143,15 +143,17 @@ function Navbar() {
                 </div>
               ))}
               {movieId && (
-                <div className="z-50 flex justify-center items-center  ">
+                <div className="nav_wrapper">
+                <div className="back_container  ">
                   <MdIcons.MdOutlineArrowBack
                     onClick={() => playVideo()}
-                    className="z-50 text-white text-[40px] mt-5 hover:text-slate-600/60 cursor-pointer "
+                    className="z-50 text-slate-300 text-[40px] mr-10 hover:text-slate-600/60 cursor-pointer "
                   />
+                </div>
                   <ReactPlayer
-                    className="react_player flex  m-2 "
-                    width="100%"
-                    height="100%"
+                    className="react_player nav_player "
+                    width="80%"
+                    height="80%"
                     control="true"
                     url={`${youTubeUrl}${movieId}`}
                   />
