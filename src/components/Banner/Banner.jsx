@@ -39,6 +39,9 @@ function Banner() {
         multi: false,
       }).then((response) => setMovieId(response));
     }
+    if (movieId == null) {
+      alert("Trailer Not Available");
+    }
   };
   return (
     <div

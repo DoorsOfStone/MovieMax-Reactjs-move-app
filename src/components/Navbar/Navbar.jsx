@@ -68,6 +68,9 @@ function Navbar() {
         multi: false,
       }).then((response) => setMovieId(response));
     }
+    if (movieId == null) {
+      alert("Trailer Not Available");
+    }
   };
 
   const updateMovie = (e) => {
@@ -144,12 +147,12 @@ function Navbar() {
               ))}
               {movieId && (
                 <div className="nav_wrapper">
-                <div className="back_container  ">
-                  <MdIcons.MdOutlineArrowBack
-                    onClick={() => playVideo()}
-                    className="z-50 text-slate-300 text-[40px] mr-10 hover:text-slate-600/60 cursor-pointer "
-                  />
-                </div>
+                  <div className="back_container  ">
+                    <MdIcons.MdOutlineArrowBack
+                      onClick={() => playVideo()}
+                      className="z-50 text-slate-300 text-[40px] mr-10 hover:text-slate-600/60 cursor-pointer "
+                    />
+                  </div>
                   <ReactPlayer
                     className="react_player nav_player "
                     width="80%"

@@ -36,6 +36,9 @@ const Row = ({ title, fetchUrl }) => {
         multi: true,
       }).then((response) => setMovieId(response));
     }
+    if (movieId == null) {
+      alert("Trailer Not Available");
+    }
   };
 
   return (
